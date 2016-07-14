@@ -13,28 +13,33 @@ namespace WebAppInMVC.Controllers
     {
         public IEnumerable<Product> Products { get; private set; }
 
-        public ViewResult List()
-        {
-            var productList = new List<SelectListItem>();
+        private ProductListViewModel productListVM = new ProductListViewModel();
 
-            foreach (Models.Product p in Products)
-            {
-                productList.Add(new SelectListItem
-                {
-                    Value = p.ProductId.ToString(),
-                    Text = "Product: " + p.Name + " " + p.Price.ToString(),
-                    // To set the selected item use the following code 
-                    // Note: you should not set every item to selected
-                    Selected = true
-                });
-            }
+        //public ViewResult List()
+        //{
+        //    var productList = new List<SelectListItem>();
 
-            ProductListviewModel productListVM = new ProductListViewModeld();
+        //    Products = new List<Product>
+        //    { new Product {Name = "Tom", Price = 100, ProductId = "1" },
+        //      new Product { Name = "Jack", Price = 101, ProductId = "2" },
+        //      new Product { Name = "Tim", Price = 101, ProductId = "3" },
+        //      new Product { Name = "Hack", Price = 101, ProductId = "4" }};
 
-            productListVM.Products = productList;
+        //    foreach (Models.Product p in Products)
+        //    {
+        //        productList.Add(new SelectListItem
+        //        {
+        //            Value = p.ProductId.ToString(),
+        //            Text = "Product: " + p.Name + " " + p.Price.ToString(),
+        //            // To set the selected item use the following code 
+        //            // Note: you should not set every item to selected
+        //            Selected = true
+        //        });
+        //    }
+        //    productListVM.Products = productList;
 
-            return View(productListVM);
-        }
+        //    return View(productListVM);
+        //}
 
         public ActionResult Index()
         {

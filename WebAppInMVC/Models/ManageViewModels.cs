@@ -9,10 +9,35 @@ namespace WebAppInMVC.Models
     /// <summary>
     /// test
     /// </summary>
-    public class ProductListviewModel
+    public class ProductListViewModel
     {
         public List<SelectListItem> Products { get; set; }
+        public ProductListViewModel()
+        {
+            var productList = new List<SelectListItem>();
+
+            var ListProducts = new List<Product>
+            { new Product {Name = "Tom", Price = 100, ProductId = "1" },
+              new Product { Name = "Jack", Price = 101, ProductId = "2" },
+              new Product { Name = "Tim", Price = 101, ProductId = "3" },
+              new Product { Name = "Hack", Price = 101, ProductId = "4" }};
+
+            foreach (Models.Product p in ListProducts)
+            {
+                productList.Add(new SelectListItem
+                {
+                    Value = p.ProductId.ToString(),
+                    Text = "Product: " + p.Name + " " + p.Price.ToString(),
+                    // To set the selected item use the following code 
+                    // Note: you should not set every item to selected
+                    Selected = true
+                });
+            }
+
+            Products = productList;
+        }
     }
+
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
@@ -89,6 +114,6 @@ namespace WebAppInMVC.Models
     public class ConfigureTwoFactorViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        //public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
 }
