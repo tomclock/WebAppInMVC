@@ -14,6 +14,7 @@ namespace WebAppInMVC.Controllers
     {
         public IEnumerable<Product> Products { get; private set; }
         private IotTestEntities DbEntities = new IotTestEntities();
+        //private IEnumerable<SelectListItem> listdrops;
 
         #region MyRegion + Index()
         /// <summary>
@@ -55,10 +56,12 @@ namespace WebAppInMVC.Controllers
         public ActionResult Index()
         {
             //show the tables in the entities
-            var query = from e in DbEntities.tb_terminal
-                        select new SelectListItem { Value = e.device_id, Text = e.device_id };
-
-            ViewBag.SelectLists = query.ToList();
+            if (ViewBag.SelectLists == null )
+            {
+                var query = from e in DbEntities.tb_terminal
+                            select new SelectListItem { Value = e.device_id, Text = e.device_id };
+                ViewBag.SelectLists = query.ToList();
+            }
 
             return View();
         } 
