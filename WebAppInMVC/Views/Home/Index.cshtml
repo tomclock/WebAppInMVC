@@ -8,12 +8,13 @@
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-@model WebAppInMVC.Models.ProductListViewModel
-<div select id="Select1">
-        @*<option></option>*@
-        @*<%=Html.DropDownList("DealerTypesDD", ViewData["DealerTypes"] as SelectList)%>*@
-        @Html.DropDownList("Products", Model.Products)
+
+@model WebAppInMVC.Models.tb_terminal
+<div select >
+    @Html.DropDownListFor(a=>a.device_id ,ViewBag.SelectLists as IEnumerable<SelectListItem>)
 </div select>
+
+
 
 
 <div class="row">

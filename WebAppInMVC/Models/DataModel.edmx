@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IotTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_company">
+          <Key>
+            <PropertyRef Name="company_id" />
+          </Key>
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="company_name" Type="nvarchar" MaxLength="64" />
+          <Property Name="used_flg" Type="int" />
+          <Property Name="access_key" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="createdate" Type="datetime" Nullable="false" />
+          <Property Name="createuserid" Type="int" Nullable="false" />
+          <Property Name="updatedate" Type="datetime" Nullable="false" />
+          <Property Name="updateuserid" Type="int" Nullable="false" />
+          <Property Name="concurrencykey" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_contract">
+          <Key>
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="contract_id" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="industry_m_kind" Type="int" Nullable="false" />
+          <Property Name="branch_name" Type="nvarchar" MaxLength="64" />
+          <Property Name="customer_id" Type="varchar" MaxLength="18" />
+          <Property Name="building_type_id" Type="int" />
+          <Property Name="contract_menu_id" Type="int" />
+          <Property Name="postcode" Type="varchar" MaxLength="7" />
+          <Property Name="address" Type="nvarchar" MaxLength="256" />
+          <Property Name="measurement_date" Type="int" />
+          <Property Name="registration_date" Type="datetime" />
+          <Property Name="service_state" Type="char" MaxLength="1" />
+          <Property Name="service_state_date" Type="datetime" />
+          <Property Name="meter_difference_time" Type="int" />
+          <Property Name="createdate" Type="datetime" Nullable="false" />
+          <Property Name="createuserid" Type="int" Nullable="false" />
+          <Property Name="updatedate" Type="datetime" Nullable="false" />
+          <Property Name="updateuserid" Type="int" Nullable="false" />
+          <Property Name="concurrencykey" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_terminal">
+          <Key>
+            <PropertyRef Name="device_id" />
+          </Key>
+          <Property Name="device_id" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="createdate" Type="datetime" Nullable="false" />
+          <Property Name="createuserid" Type="int" Nullable="false" />
+          <Property Name="updatedate" Type="datetime" Nullable="false" />
+          <Property Name="updateuserid" Type="int" Nullable="false" />
+          <Property Name="concurrencykey" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_terminal_contract_relation">
+          <Key>
+            <PropertyRef Name="contract_id" />
+            <PropertyRef Name="device_id" />
+            <PropertyRef Name="start_enable_date" />
+          </Key>
+          <Property Name="contract_id" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="device_id" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="start_enable_date" Type="datetime" Nullable="false" />
+          <Property Name="end_enable_date" Type="datetime" Nullable="false" />
+          <Property Name="createdate" Type="datetime" Nullable="false" />
+          <Property Name="createuserid" Type="int" Nullable="false" />
+          <Property Name="updatedate" Type="datetime" Nullable="false" />
+          <Property Name="updateuserid" Type="int" Nullable="false" />
+          <Property Name="concurrencykey" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="family_name" Type="nvarchar" MaxLength="60" />
+          <Property Name="given_name" Type="nvarchar" MaxLength="60" />
+          <Property Name="family_name_kana" Type="nvarchar" MaxLength="60" />
+          <Property Name="given_name_kana" Type="nvarchar" MaxLength="60" />
+          <Property Name="user_address" Type="varchar" MaxLength="20" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="del_flag" Type="bit" />
+          <Property Name="createdate" Type="datetime" Nullable="false" />
+          <Property Name="createuserid" Type="int" Nullable="false" />
+          <Property Name="updatedate" Type="datetime" Nullable="false" />
+          <Property Name="updateuserid" Type="int" Nullable="false" />
+          <Property Name="concurrencykey" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_user_contract_relation">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="contract_id" />
+            <PropertyRef Name="authority_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="contract_id" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="authority_id" Type="int" Nullable="false" />
+          <Property Name="createdate" Type="datetime" Nullable="false" />
+          <Property Name="createuserid" Type="int" Nullable="false" />
+          <Property Name="updatedate" Type="datetime" Nullable="false" />
+          <Property Name="updateuserid" Type="int" Nullable="false" />
+          <Property Name="concurrencykey" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="IotTestModelStoreContainer">
+          <EntitySet Name="tb_company" EntityType="Self.tb_company" Schema="custom" store:Type="Tables" />
+          <EntitySet Name="tb_contract" EntityType="Self.tb_contract" Schema="custom" store:Type="Tables" />
+          <EntitySet Name="tb_terminal" EntityType="Self.tb_terminal" Schema="custom" store:Type="Tables" />
+          <EntitySet Name="tb_terminal_contract_relation" EntityType="Self.tb_terminal_contract_relation" Schema="custom" store:Type="Tables" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" Schema="custom" store:Type="Tables" />
+          <EntitySet Name="tb_user_contract_relation" EntityType="Self.tb_user_contract_relation" Schema="custom" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IotTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_company">
+          <Key>
+            <PropertyRef Name="company_id" />
+          </Key>
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="company_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="used_flg" Type="Int32" />
+          <Property Name="access_key" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createuserid" Type="Int32" Nullable="false" />
+          <Property Name="updatedate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateuserid" Type="Int32" Nullable="false" />
+          <Property Name="concurrencykey" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tb_contract">
+          <Key>
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="contract_id" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="industry_m_kind" Type="Int32" Nullable="false" />
+          <Property Name="branch_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="customer_id" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="building_type_id" Type="Int32" />
+          <Property Name="contract_menu_id" Type="Int32" />
+          <Property Name="postcode" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="measurement_date" Type="Int32" />
+          <Property Name="registration_date" Type="DateTime" Precision="3" />
+          <Property Name="service_state" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="service_state_date" Type="DateTime" Precision="3" />
+          <Property Name="meter_difference_time" Type="Int32" />
+          <Property Name="createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createuserid" Type="Int32" Nullable="false" />
+          <Property Name="updatedate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateuserid" Type="Int32" Nullable="false" />
+          <Property Name="concurrencykey" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tb_terminal">
+          <Key>
+            <PropertyRef Name="device_id" />
+          </Key>
+          <Property Name="device_id" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createuserid" Type="Int32" Nullable="false" />
+          <Property Name="updatedate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateuserid" Type="Int32" Nullable="false" />
+          <Property Name="concurrencykey" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tb_terminal_contract_relation">
+          <Key>
+            <PropertyRef Name="contract_id" />
+            <PropertyRef Name="device_id" />
+            <PropertyRef Name="start_enable_date" />
+          </Key>
+          <Property Name="contract_id" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="device_id" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="start_enable_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_enable_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createuserid" Type="Int32" Nullable="false" />
+          <Property Name="updatedate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateuserid" Type="Int32" Nullable="false" />
+          <Property Name="concurrencykey" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tb_user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="family_name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="given_name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="family_name_kana" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="given_name_kana" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="user_address" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="del_flag" Type="Boolean" />
+          <Property Name="createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createuserid" Type="Int32" Nullable="false" />
+          <Property Name="updatedate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateuserid" Type="Int32" Nullable="false" />
+          <Property Name="concurrencykey" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tb_user_contract_relation">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="contract_id" />
+            <PropertyRef Name="authority_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="contract_id" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="authority_id" Type="Int32" Nullable="false" />
+          <Property Name="createdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createuserid" Type="Int32" Nullable="false" />
+          <Property Name="updatedate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updateuserid" Type="Int32" Nullable="false" />
+          <Property Name="concurrencykey" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityContainer Name="IotTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_company" EntityType="Self.tb_company" />
+          <EntitySet Name="tb_contract" EntityType="Self.tb_contract" />
+          <EntitySet Name="tb_terminal" EntityType="Self.tb_terminal" />
+          <EntitySet Name="tb_terminal_contract_relation" EntityType="Self.tb_terminal_contract_relation" />
+          <EntitySet Name="tb_user" EntityType="Self.tb_user" />
+          <EntitySet Name="tb_user_contract_relation" EntityType="Self.tb_user_contract_relation" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IotTestModelStoreContainer" CdmEntityContainer="IotTestEntities">
+          <EntitySetMapping Name="tb_company">
+            <EntityTypeMapping TypeName="IotTestModel.tb_company">
+              <MappingFragment StoreEntitySet="tb_company">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="used_flg" ColumnName="used_flg" />
+                <ScalarProperty Name="access_key" ColumnName="access_key" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="updateuserid" ColumnName="updateuserid" />
+                <ScalarProperty Name="concurrencykey" ColumnName="concurrencykey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_contract">
+            <EntityTypeMapping TypeName="IotTestModel.tb_contract">
+              <MappingFragment StoreEntitySet="tb_contract">
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="industry_m_kind" ColumnName="industry_m_kind" />
+                <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="building_type_id" ColumnName="building_type_id" />
+                <ScalarProperty Name="contract_menu_id" ColumnName="contract_menu_id" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="measurement_date" ColumnName="measurement_date" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+                <ScalarProperty Name="service_state" ColumnName="service_state" />
+                <ScalarProperty Name="service_state_date" ColumnName="service_state_date" />
+                <ScalarProperty Name="meter_difference_time" ColumnName="meter_difference_time" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="updateuserid" ColumnName="updateuserid" />
+                <ScalarProperty Name="concurrencykey" ColumnName="concurrencykey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_terminal">
+            <EntityTypeMapping TypeName="IotTestModel.tb_terminal">
+              <MappingFragment StoreEntitySet="tb_terminal">
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="updateuserid" ColumnName="updateuserid" />
+                <ScalarProperty Name="concurrencykey" ColumnName="concurrencykey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_terminal_contract_relation">
+            <EntityTypeMapping TypeName="IotTestModel.tb_terminal_contract_relation">
+              <MappingFragment StoreEntitySet="tb_terminal_contract_relation">
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="start_enable_date" ColumnName="start_enable_date" />
+                <ScalarProperty Name="end_enable_date" ColumnName="end_enable_date" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="updateuserid" ColumnName="updateuserid" />
+                <ScalarProperty Name="concurrencykey" ColumnName="concurrencykey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_user">
+            <EntityTypeMapping TypeName="IotTestModel.tb_user">
+              <MappingFragment StoreEntitySet="tb_user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="family_name" ColumnName="family_name" />
+                <ScalarProperty Name="given_name" ColumnName="given_name" />
+                <ScalarProperty Name="family_name_kana" ColumnName="family_name_kana" />
+                <ScalarProperty Name="given_name_kana" ColumnName="given_name_kana" />
+                <ScalarProperty Name="user_address" ColumnName="user_address" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="updateuserid" ColumnName="updateuserid" />
+                <ScalarProperty Name="concurrencykey" ColumnName="concurrencykey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_user_contract_relation">
+            <EntityTypeMapping TypeName="IotTestModel.tb_user_contract_relation">
+              <MappingFragment StoreEntitySet="tb_user_contract_relation">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="authority_id" ColumnName="authority_id" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="createuserid" ColumnName="createuserid" />
+                <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+                <ScalarProperty Name="updateuserid" ColumnName="updateuserid" />
+                <ScalarProperty Name="concurrencykey" ColumnName="concurrencykey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
